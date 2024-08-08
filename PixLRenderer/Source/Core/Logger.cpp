@@ -1,4 +1,4 @@
-﻿#include <OpenGLRenderer/Core/Logger.hpp>
+﻿#include <PixLRenderer/Core/Logger.hpp>
 
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include <spdlog/sinks/base_sink.h>

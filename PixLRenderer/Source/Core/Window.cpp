@@ -1,6 +1,6 @@
-﻿#include <OpenGLRenderer/Core/Window.hpp>
+﻿#include <PixLRenderer/Core/Window.hpp>
 
-#include <OpenGLRenderer/Core/Logger.hpp>
+#include <PixLRenderer/Core/Logger.hpp>
 
 namespace PixL {
     Window::Window(const WindowProperties& properties) {
@@ -23,7 +23,7 @@ namespace PixL {
         const i32 width = properties.Fullscreen ? videoMode->width : properties.Width;
         const i32 height = properties.Fullscreen ? videoMode->height : properties.Height;
 
-        m_Window = glfwCreateWindow(width, height, "OpenGL Renderer",
+        m_Window = glfwCreateWindow(width, height, properties.Title.c_str(),
                                     properties.VSync ? glfwGetPrimaryMonitor() : nullptr, nullptr);
         if (m_Window == nullptr) {
             glfwTerminate();

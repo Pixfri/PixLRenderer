@@ -1,6 +1,6 @@
 #include <TestApplication.hpp>
 
-#include <OpenGLRenderer/Core/Logger.hpp>
+#include <PixLRenderer/Core/Logger.hpp>
 
 TestApplication::TestApplication(const PixL::WindowProperties& properties) : Application(properties) {
 }
@@ -16,6 +16,8 @@ void TestApplication::OnUpdate() {
 }
 
 void TestApplication::OnRender() {
+    glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
 }
 
 void TestApplication::OnInput(const PixL::KeyDownEvent& event) {

@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include <OpenGLRenderer/pch.hpp>
+#include <PixLRenderer/pch.hpp>
 
 #include <functional>
 #include <ostream>
@@ -327,5 +327,5 @@ virtual int GetCategoryFlags() const override { return IntegerFromEnum(category)
 
 #pragma endregion Events
 
-#include <OpenGLRenderer/Core/Event.inl>
+#include <PixLRenderer/Core/Event.inl>
 }

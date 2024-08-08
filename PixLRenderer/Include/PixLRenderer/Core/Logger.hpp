@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include <OpenGLRenderer/pch.hpp>
+#include <PixLRenderer/pch.hpp>
 
 #include <spdlog/spdlog.h>
 
@@ -76,5 +76,5 @@ namespace PixL {
         constexpr void AppFatal(ErrorCode errorCode, Args&&... args);
     }
 
-#include <OpenGLRenderer/Core/Logger.inl>
+#include <PixLRenderer/Core/Logger.inl>
 }

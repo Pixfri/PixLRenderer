@@ -1,8 +1,8 @@
 ﻿#pragma once
 
-#include <OpenGLRenderer/Core/Event.hpp>
+#include <PixLRenderer/Core/Event.hpp>
 
-#include <OpenGLRenderer/pch.hpp>
+#include <PixLRenderer/pch.hpp>
 
 #include <glad/glad.h>
 
@@ -191,5 +191,5 @@ namespace PixL {
         void UpdateFullscreenMode();
     };
 
-#include <OpenGLRenderer/Core/Window.inl>
+#include <PixLRenderer/Core/Window.inl>
 }

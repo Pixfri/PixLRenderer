@@ -1,6 +1,6 @@
 #pragma once
 
-#include <OpenGLRenderer/Application.hpp>
+#include <PixLRenderer/Application.hpp>
 
 class TestApplication final : public PixL::Application {
 public:

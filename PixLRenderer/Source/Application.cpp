@@ -1,6 +1,6 @@
-#include <OpenGLRenderer/Application.hpp>
+#include <PixLRenderer/Application.hpp>
 
-#include <OpenGLRenderer/Core/Logger.hpp>
+#include <PixLRenderer/Core/Logger.hpp>
 
 namespace PixL {
     Application* Application::m_SApplicationInstance = nullptr;

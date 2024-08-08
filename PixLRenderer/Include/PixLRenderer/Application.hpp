@@ -1,9 +1,9 @@
 #pragma once
 
-#include <OpenGLRenderer/Core/Event.hpp>
-#include <OpenGLRenderer/Core/Window.hpp>
+#include <PixLRenderer/Core/Event.hpp>
+#include <PixLRenderer/Core/Window.hpp>
 
-#include <OpenGLRenderer/pch.hpp>
+#include <PixLRenderer/pch.hpp>
 
 namespace PixL {
     class Application {
@@ -37,5 +37,5 @@ namespace PixL {
         inline void Quit();
     };
 
-#include <OpenGLRenderer/Application.inl>
+#include <PixLRenderer/Application.inl>
 }
