@@ -17,4 +17,8 @@ protected:
     void OnEvent(OpenGLRenderer::Event& event) override;
     void OnUpdate() override;
     void OnRender() override;
+
+    void OnInput(OpenGLRenderer::KeyDownEvent& event);
+
+    bool m_IsFullscreen = false;
 };

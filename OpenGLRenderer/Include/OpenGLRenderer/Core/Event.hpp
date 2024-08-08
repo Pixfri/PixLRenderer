@@ -38,7 +38,7 @@ namespace OpenGLRenderer {
 
     inline EventCategory operator|(const EventCategory a, const EventCategory b);
 
-#define BIND_EVENT_TO_EVENT_FUNCTION(x) [this](auto && PH1) { return (x)(PH1); }
+#define BIND_EVENT_TO_EVENT_HANDLER(x) [this](auto && PH1) { return (x)(PH1); }
     
 #define EVENT_TYPE_CLASS(type)                                                  \
 static EventType GetStaticType() { return type; }                           \

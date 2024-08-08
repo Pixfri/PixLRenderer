@@ -8,6 +8,8 @@ namespace OpenGLRenderer {
             Log::EngineFatal({0x01, 0x00}, "Failed to initialize GLFW.");
         }
 
+        Log::EngineTrace("Creating window and initializing OpenGL loader...");
+
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -16,7 +18,13 @@ namespace OpenGLRenderer {
         glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
 #endif
 
-        m_Window = glfwCreateWindow(800, 600, "OpenGL Renderer", nullptr, nullptr);
+        const GLFWvidmode* videoMode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+
+        const i32 width = properties.Fullscreen ? videoMode->width : properties.Width;
+        const i32 height = properties.Fullscreen ? videoMode->height : properties.Height;
+
+        m_Window = glfwCreateWindow(width, height, "OpenGL Renderer",
+                                    properties.VSync ? glfwGetPrimaryMonitor() : nullptr, nullptr);
         if (m_Window == nullptr) {
             glfwTerminate();
             Log::EngineFatal({0x01, 0x01}, "Failed to create GLFW window.");
@@ -28,12 +36,18 @@ namespace OpenGLRenderer {
             Log::EngineFatal({0x01, 0x02}, "Failed to initialize GLAD.");
         }
 
+        Log::EngineTrace("Window created and OpenGL loader initialized. Setting up callbacks...");
+
         m_Data.Width = properties.Width;
         m_Data.Height = properties.Height;
         m_Data.Focused = true;
+        m_Data.Fullscreen = properties.Fullscreen;
+        m_Data.VSyncEnabled = properties.VSync;
+        m_Data.ShouldUpdateFullscreen = false;
 
         glfwSetWindowUserPointer(m_Window, &m_Data);
 
+        SetVSync(properties.VSync);
 
         // ------------------------------- Window callbacks ------------------------------- //
         glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window) {
@@ -132,14 +146,41 @@ namespace OpenGLRenderer {
             data->Focused = focused;
         });
 
+        Log::EngineTrace("Callbacks are set up successfully.");
+
         m_Initialized = true;
     }
 
     Window::~Window() {
         if (m_Initialized) {
+            Log::EngineTrace("Destroying window.");
             glfwDestroyWindow(m_Window);
         }
 
         glfwTerminate();
+    }
+
+    void Window::UpdateFullscreenMode() {
+        if (m_Data.ShouldUpdateFullscreen) {
+            static i32 posX, posY;
+            glfwGetWindowPos(m_Window, &posX, &posY);
+            static i32 sizeX, sizeY;
+            glfwGetWindowSize(m_Window, &sizeX, &sizeY);
+
+            if (m_Data.Fullscreen) {
+                const auto monitor = glfwGetPrimaryMonitor();
+                const auto mode = glfwGetVideoMode(monitor);
+
+                // store position and size to restore later
+                glfwGetWindowPos(m_Window, &posX, &posY);
+                glfwGetWindowSize(m_Window, &sizeX, &sizeY);
+
+                glfwSetWindowMonitor(m_Window, monitor, 0, 0, mode->width, mode->height,
+                                     IsVSyncEnabled() ? mode->refreshRate : 0);
+            } else {
+                glfwSetWindowMonitor(m_Window, nullptr, posX, posY, sizeX, sizeY, 0);
+            }
+            m_Data.ShouldUpdateFullscreen = false;
+        }
     }
 }

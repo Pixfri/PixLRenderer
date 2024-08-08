@@ -17,14 +17,17 @@ namespace OpenGLRenderer {
         m_Window = std::make_unique<Window>(properties);
         m_Window->SetEventCallback([this](Event& event) {
             EventDispatcher dispatcher(event);
-            dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_TO_EVENT_FUNCTION(Application::OnWindowClose));
+            dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_TO_EVENT_HANDLER(Application::OnWindowClose));
             OnEvent(event);
         });
+
+        Log::AppInfo("Launching application...");
 
         m_IsRunning = true;
     }
 
     Application::~Application() {
+        Log::AppInfo("Quitting application...");
         m_SApplicationInstance = nullptr;
     }
     
