@@ -5,7 +5,7 @@
 
 #include <OpenGLRenderer/pch.hpp>
 
-namespace OpenGLRenderer {
+namespace PixL {
     class Application {
         static Application* m_SApplicationInstance;
 
@@ -33,6 +33,8 @@ namespace OpenGLRenderer {
         virtual void OnRender() = 0;
 
         void OnWindowClose(WindowCloseEvent& event);
+
+        inline void Quit();
     };
 
 #include <OpenGLRenderer/Application.inl>

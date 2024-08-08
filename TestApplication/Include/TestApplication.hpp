@@ -2,9 +2,9 @@
 
 #include <OpenGLRenderer/Application.hpp>
 
-class TestApplication final : public OpenGLRenderer::Application {
+class TestApplication final : public PixL::Application {
 public:
-    TestApplication(const OpenGLRenderer::WindowProperties& properties);
+    TestApplication(const PixL::WindowProperties& properties);
     ~TestApplication() override = default;
 
     TestApplication(const TestApplication&) = delete;
@@ -14,11 +14,11 @@ public:
     TestApplication& operator=(TestApplication&&) = delete;
 
 protected:
-    void OnEvent(OpenGLRenderer::Event& event) override;
+    void OnEvent(PixL::Event& event) override;
     void OnUpdate() override;
     void OnRender() override;
 
-    void OnInput(OpenGLRenderer::KeyDownEvent& event);
+    void OnInput(const PixL::KeyDownEvent& event);
 
     bool m_IsFullscreen = false;
 };

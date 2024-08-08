@@ -2,7 +2,7 @@
 
 #include <OpenGLRenderer/Core/Logger.hpp>
 
-namespace OpenGLRenderer {
+namespace PixL {
     Window::Window(const WindowProperties& properties) {
         if (!glfwInit()) {
             Log::EngineFatal({0x01, 0x00}, "Failed to initialize GLFW.");
@@ -30,6 +30,12 @@ namespace OpenGLRenderer {
             Log::EngineFatal({0x01, 0x01}, "Failed to create GLFW window.");
         }
         glfwMakeContextCurrent(m_Window);
+
+        if (!properties.Fullscreen) {
+            const i32 windowLeft = videoMode->width / 2 - properties.Width / 2;
+            const i32 windowTop = videoMode->height / 2 - properties.Height / 2;
+            glfwSetWindowPos(m_Window, windowLeft, windowTop);
+        }
 
         if (!gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress))) {
             // NOLINT(clang-diagnostic-cast-function-type-strict)

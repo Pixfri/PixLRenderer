@@ -2,14 +2,14 @@
 
 #include <OpenGLRenderer/Core/Logger.hpp>
 
-TestApplication::TestApplication(const OpenGLRenderer::WindowProperties& properties) : Application(properties) {
+TestApplication::TestApplication(const PixL::WindowProperties& properties) : Application(properties) {
 }
 
 
-void TestApplication::OnEvent(OpenGLRenderer::Event& event) {
-    OpenGLRenderer::EventDispatcher dispatcher(event);
+void TestApplication::OnEvent(PixL::Event& event) {
+    PixL::EventDispatcher dispatcher(event);
 
-    dispatcher.Dispatch<OpenGLRenderer::KeyDownEvent>(BIND_EVENT_TO_EVENT_HANDLER(TestApplication::OnInput));
+    dispatcher.Dispatch<PixL::KeyDownEvent>(BIND_EVENT_TO_EVENT_HANDLER(TestApplication::OnInput));
 }
 
 void TestApplication::OnUpdate() {
@@ -18,6 +18,8 @@ void TestApplication::OnUpdate() {
 void TestApplication::OnRender() {
 }
 
-void TestApplication::OnInput(OpenGLRenderer::KeyDownEvent& event) {
-    
+void TestApplication::OnInput(const PixL::KeyDownEvent& event) {
+    if (event.GetScancode() == static_cast<i32>(PixL::Keys::Escape)) {
+        Quit();
+    }
 }

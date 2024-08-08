@@ -10,7 +10,7 @@
 
 #include <functional>
 
-namespace OpenGLRenderer {
+namespace PixL {
     enum class Keys {
         Space = 32,
         Apostrophe = 39,

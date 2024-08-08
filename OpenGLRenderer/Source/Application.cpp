@@ -2,7 +2,7 @@
 
 #include <OpenGLRenderer/Core/Logger.hpp>
 
-namespace OpenGLRenderer {
+namespace PixL {
     Application* Application::m_SApplicationInstance = nullptr;
 
     Application::Application(const WindowProperties& properties) {

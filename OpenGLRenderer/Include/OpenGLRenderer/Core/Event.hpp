@@ -7,7 +7,7 @@
 #include <sstream>
 #include <type_traits>
 
-namespace OpenGLRenderer {
+namespace PixL {
     template <typename Enumeration, std::enable_if_t<std::is_enum_v<Enumeration>, bool>  = true>
     constexpr auto IntegerFromEnum(const Enumeration value) -> std::underlying_type_t<Enumeration> {
         return static_cast<std::underlying_type_t<Enumeration>>(value);
